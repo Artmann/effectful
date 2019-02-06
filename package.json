@@ -1,0 +1,32 @@
+{
+  "author": "Christoffer Artmann <Artgaard@gmail.com>",
+  "keywords": [
+    "redux",
+    "effects",
+    "middleware",
+    "redux-middleware"
+  ],
+  "scripts": {
+    "lint": "eslint src",
+    "test": "jest"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "effectful",
+  "repository": "https://github.com/Artmann/effectful",
+  "private": false,
+  "version": "1.0.0",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "linebreak-style": 0
+  }
+}
