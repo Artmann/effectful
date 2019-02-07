@@ -2,7 +2,7 @@
 
 The easy way to handle side effects in [Redux](https://redux.js.org/)
 
-[![build status](https://img.shields.io/travis/artmann/effectful/master.svg?style=flat-square)](https://travis-ci.org/artmann/effectful)
+[![build status](https://img.shields.io/travis/Artmann/effectful/master.svg?style=flat-square)](https://travis-ci.org/Artmann/effectful)
 [![npm version](https://img.shields.io/npm/v/effectful.svg?style=flat-square)](https://www.npmjs.com/package/effectful)
 
 ```js
