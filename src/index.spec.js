@@ -3,6 +3,8 @@ import applyEffects from '.';
 
 
 describe('applyEffects', () => {
+  const dispatch = () => {};
+
   it('returns a function to handle next', () => {
     const next = applyEffects({});
 
@@ -24,7 +26,6 @@ describe('applyEffects', () => {
   });
 
   it('triggers effects', () => {
-    const dispatch = () => {};
     const state = { foo: 'bar' };
     const getState = () => state;
     const next = () => {};
@@ -44,7 +45,6 @@ describe('applyEffects', () => {
   it('works with async effects', () => {
     let hasBeenCalled = false;
 
-    const dispatch = () => {};
     const getState = () => ({});
     const next = () => {};
     const effects = {
@@ -57,5 +57,25 @@ describe('applyEffects', () => {
     middleware({ dispatch, getState })(next)({ type: 'ACTION' });
 
     expect(hasBeenCalled).toBeTruthy();
+  });
+
+  it('handles an array of effects', () => {
+    const getState = () => ({ foo: 'bar' });
+    const next = () => {};
+    const d = jest.fn();
+    const effect1 = jest.fn(async () => d({ type: 'ANOTHER_ACTION' }));
+    const effect2 = jest.fn(() => d({ type: 'A_THIRD_ACTION' }));
+
+    const effects = {
+      ACTION: [effect1, effect2],
+    };
+    const middleware = applyEffects(effects);
+
+    middleware({ dispatch, getState })(next)({ type: 'ACTION' });
+
+    expect(effect1).toHaveBeenCalledWith({ foo: 'bar' }, dispatch);
+    expect(effect2).toHaveBeenCalledWith({ foo: 'bar' }, dispatch);
+    expect(d).toHaveBeenCalledWith({ type: 'ANOTHER_ACTION' });
+    expect(d).toHaveBeenCalledWith({ type: 'A_THIRD_ACTION' });
   });
 });

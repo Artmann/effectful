@@ -51,3 +51,12 @@ const store = createStore(
   applyMiddleware(applyEffects(effects));
 );
 ```
+
+If you want to run multiple effects when an action is dispatched you can pass an array of effects.
+
+```
+export default {
+  APP_MOUNTED: [fetchTodos, logger],
+  SEARCH_QUERY_CHANGED: fetchTodos
+};
+```

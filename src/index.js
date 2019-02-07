@@ -1,18 +1,17 @@
-import isPromise from './is-promise';
+import ensureArray from './ensure-array';
 
-export default function applyEffects(effects) {
+export default function applyEffects(effectMapping) {
   const middleware = store => next => (action) => {
     const result = next(action);
 
-    if (!Object.prototype.hasOwnProperty.call(effects, action.type)) {
+    if (!Object.prototype.hasOwnProperty.call(effectMapping, action.type)) {
       return result;
     }
 
-    const effect = effects[action.type](store.getState(), store.dispatch);
+    const { dispatch, getState } = store;
+    const effects = ensureArray(effectMapping[action.type]);
 
-    if (isPromise(effect)) {
-      return effect.then(() => result);
-    }
+    effects.forEach(effect => effect(getState(), dispatch));
 
     return result;
   };
