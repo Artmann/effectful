@@ -43,8 +43,9 @@ Then all you have to do is add the effectful middleware to your store.
 // store/index.js
 
 import { createStore, applyMiddleware } from 'redux';
-import todos from './reducers';
-import effects from './effects';
+import applyEffects from 'effectful';
+import todos from '../reducers';
+import effects from '../effects';
 
 const store = createStore(
   todos,
