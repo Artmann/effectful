@@ -17,7 +17,7 @@ actions you want them to be triggered by.
 ```js
 // effects/index.js
 
-const fetchTodos = async (state, dispatch) => {
+const fetchTodos = async (state, action, dispatch) => {
   const { searchQuery } = state;
   const url = `https://my-api.com/todos?query=${searchQuery}`;
 

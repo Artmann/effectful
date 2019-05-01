@@ -11,7 +11,7 @@ export default function applyEffects(effectMapping) {
     const { dispatch, getState } = store;
     const effects = ensureArray(effectMapping[action.type]);
 
-    effects.forEach(effect => effect(getState(), dispatch));
+    effects.forEach(effect => effect(getState(), action, dispatch));
 
     return result;
   };
