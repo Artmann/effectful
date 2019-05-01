@@ -1,6 +1,6 @@
 import '@babel/polyfill';
-import applyEffects from '.';
 
+import applyEffects from '.';
 
 describe('applyEffects', () => {
   const dispatch = () => {};
@@ -35,10 +35,11 @@ describe('applyEffects', () => {
       ACTION_2: jest.fn(),
     };
     const middleware = applyEffects(effects);
+    const action = { type: 'ACTION_1' };
 
-    middleware({ dispatch, getState })(next)({ type: 'ACTION_1' });
+    middleware({ dispatch, getState })(next)(action);
 
-    expect(effects.ACTION_1).toHaveBeenCalledWith(state, dispatch);
+    expect(effects.ACTION_1).toHaveBeenCalledWith(state, action, dispatch);
     expect(effects.ACTION_2).not.toHaveBeenCalled();
   });
 
@@ -70,11 +71,12 @@ describe('applyEffects', () => {
       ACTION: [effect1, effect2],
     };
     const middleware = applyEffects(effects);
+    const action = { type: 'ACTION' };
 
-    middleware({ dispatch, getState })(next)({ type: 'ACTION' });
+    middleware({ dispatch, getState })(next)(action);
 
-    expect(effect1).toHaveBeenCalledWith({ foo: 'bar' }, dispatch);
-    expect(effect2).toHaveBeenCalledWith({ foo: 'bar' }, dispatch);
+    expect(effect1).toHaveBeenCalledWith({ foo: 'bar' }, action, dispatch);
+    expect(effect2).toHaveBeenCalledWith({ foo: 'bar' }, action, dispatch);
     expect(d).toHaveBeenCalledWith({ type: 'ANOTHER_ACTION' });
     expect(d).toHaveBeenCalledWith({ type: 'A_THIRD_ACTION' });
   });
